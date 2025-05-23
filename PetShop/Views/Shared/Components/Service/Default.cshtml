@@ -1,0 +1,18 @@
+﻿@model IEnumerable<PetShop.Models.TbService>
+
+@foreach (var item in Model)
+{
+    string sUrl = $"/service/{item.Title}-{item.ServiceId}.html";
+    <div class="col-md-6">
+        <div class="service-item bg-light d-flex p-4">
+            <i class="@item.Image display-1 text-primary me-4"></i>
+            <div>
+                <h5 class="text-uppercase mb-3">@item.Title</h5>
+                <p>@item.Description</p>
+          
+                <a class="text-primary text-uppercase" href="@sUrl">Xem thêm<i class="bi bi-chevron-right"></i></a>
+            </div>
+        </div>
+    </div>
+   
+}

@@ -1,0 +1,164 @@
+﻿<!-- Hero Start -->
+<div class="container-fluid bg-primary py-5 mb-5 hero-header">
+    <div class="container py-5">
+        <div class="row justify-content-start">
+            <div class="col-lg-8 text-center text-lg-start">
+                <h5 style="color:#73d5ff">Ưu đãi đặc biệt</h5>
+                <h1 >Thức ăn Little One</h1>
+                <h1>cho chuột Hamster lùn</h1>
+                <p style="color:gray">Khuyến mãi đặc biệt chỉ có vào <b style="color:#52ceff">chủ nhật</b> hàng tuần</p>
+                <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
+                    <a href="" class="btn btn-outline-light border-2 py-md-3 px-md-5 me-5 w3-round-xxlarge" style="background-color:#ef74fc ">Đọc thêm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero End -->
+<!-- Video Modal Start -->
+<div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-0">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Youtube Video</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- 16:9 aspect ratio -->
+                <div class="ratio ratio-16x9">
+                    <iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always"
+                            allow="autoplay"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Video Modal End -->
+<!-- About Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row gx-5">
+            <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
+                <div class="position-relative h-100">
+                    <img class="position-absolute w-100 h-100 rounded" src="~/assets/img/about.jpg" style="object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="border-start border-5 border-primary ps-5 mb-5">
+                    <h6 class="text-primary text-uppercase">Giới thiệu về chúng tôi</h6>
+                    <h1 class="display-5 text-uppercase mb-0">Chúng tôi luôn làm cho thú cưng của bạn cảm thấy hạnh phúc</h1>
+                </div>
+                <h4 class="text-body mb-4">Diam dolor diam ipsum tempor sit. Clita erat ipsum et lorem stet no labore lorem sit clita duo justo magna dolore</h4>
+                <div class="bg-light p-4">
+                    <ul class="nav nav-pills justify-content-between mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item w-50" role="presentation">
+                            <button class="nav-link text-uppercase w-100 active" id="pills-1-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-1" type="button" role="tab" aria-controls="pills-1"
+                                    aria-selected="true">
+                                Sứ mệnh của chúng tôi
+                            </button>
+                        </li>
+                        <li class="nav-item w-50" role="presentation">
+                            <button class="nav-link text-uppercase w-100" id="pills-2-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-2" type="button" role="tab" aria-controls="pills-2"
+                                    aria-selected="false">
+                                Tầm nhìn của chúng tôi
+                            </button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-1" role="tabpanel" aria-labelledby="pills-1-tab">
+                            <p class="mb-0">Tempor erat elitr at rebum at at clita aliquyam consetetur. Diam dolor diam ipsum et, tempor voluptua sit consetetur sit. Aliquyam diam amet diam et eos sadipscing labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor consetetur takimata eirmod, dolores takimata consetetur invidunt magna dolores aliquyam dolores dolore. Amet erat amet et magna</p>
+                        </div>
+                        <div class="tab-pane fade" id="pills-2" role="tabpanel" aria-labelledby="pills-2-tab">
+                            <p class="mb-0">Tempor erat elitr at rebum at at clita aliquyam consetetur. Diam dolor diam ipsum et, tempor voluptua sit consetetur sit. Aliquyam diam amet diam et eos sadipscing labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor consetetur takimata eirmod, dolores takimata consetetur invidunt magna dolores aliquyam dolores dolore. Amet erat amet et magna</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+<!-- Services Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="border-start border-5 border-primary ps-5 mb-5" style="max-width: 600px;">
+            <h6 class="text-primary text-uppercase">Dịch vụ</h6>
+            <h1 class="display-5 text-uppercase mb-0">Dịch vụ chăm sóc thú cưng tuyệt vời của chúng tôi</h1>
+        </div>
+        <div class="row g-5">
+            @await Component.InvokeAsync("Service")
+        </div>
+    </div>
+</div>
+<!-- Services End -->
+<!-- Products Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="border-start border-5 border-primary ps-5 mb-5" style="max-width: 600px;">
+            <h6 class="text-primary text-uppercase">Sản phẩm mới</h6>
+            <h1 class="display-5 text-uppercase mb-0">Sản phẩm tuyệt vời cho thú cưng của bạn</h1>
+        </div>
+        <div class="owl-carousel product-carousel">
+            @await Component.InvokeAsync("Product")
+        </div>
+    </div>
+</div>
+<!-- Products End -->
+<!-- Offer Start -->
+<div class="container-fluid bg-offer my-5 py-5">
+    <div class="container py-5">
+        <div class="row gx-5 justify-content-start">
+            <div class="col-lg-7">
+                <div class="border-start border-5 border-dark ps-5 mb-5">
+                    <h6 class="text-dark text-uppercase">Khuyến mãi đặc biệt</h6>
+                    <h1 class="display-5 text-uppercase text-white mb-0">Giảm 50% cho tất cả mặt hàng trong lần đặt hàng đầu tiên</h1>
+                </div>
+                <p class="text-white mb-4">Eirmod sed tempor lorem ut dolores sit kasd ipsum. Dolor ea et dolore et at sea ea at dolor justo ipsum duo rebum sea. Eos vero eos vero ea et dolore eirmod et. Dolores diam duo lorem. Elitr ut dolores magna sit. Sea dolore sed et.</p>
+                <a href="" class="btn btn-light py-md-3 px-md-5 me-3">Mua ngay</a>
+                <a href="" class="btn btn-outline-light py-md-3 px-md-5">Đọc thêm</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Offer End -->
+<!-- Team Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="border-start border-5 border-primary ps-5 mb-5" style="max-width: 600px;">
+            <h6 class="text-primary text-uppercase">Thành viên nhóm</h6>
+            <h1 class="display-5 text-uppercase mb-0">Chuyên gia chăm sóc thú cưng có trình độ</h1>
+        </div>
+        <div class="owl-carousel team-carousel position-relative" style="padding-right: 25px;">
+            @await Component.InvokeAsync("Team")
+        </div>
+    </div>
+</div>
+<!-- Team End -->
+<!-- Testimonial Start -->
+<div class="container-fluid bg-testimonial py-5" style="margin: 45px 0;">
+    <div class="container py-5">
+        <div class="row justify-content-end">
+            <div class="col-lg-7">
+                <div class="owl-carousel testimonial-carousel bg-white p-5">
+                    @await Component.InvokeAsync("ReView")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Testimonial End -->
+<!-- Blog Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="border-start border-5 border-primary ps-5 mb-5" style="max-width: 600px;">
+            <h6 class="text-primary text-uppercase">Blog mới nhất</h6>
+            <h1 class="display-5 text-uppercase mb-0">Bài viết mới nhất từ bài đăng trên blog của chúng tôi</h1>
+        </div>
+        <div class="row g-5">
+            @await Component.InvokeAsync("Blog")
+        </div>
+    </div>
+</div>
+<!-- Blog End -->

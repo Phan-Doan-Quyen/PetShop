@@ -1,0 +1,21 @@
+﻿@model IEnumerable<PetShop.Models.TbAccount>
+
+@foreach (var item in Model)
+{
+    <div class="team-item">
+        <div class="position-relative overflow-hidden">
+            <img class="img-fluid w-100" src="~/assets/img/Account/@item.Avatar" style="width:300px; height: 300px" alt="">
+            <div class="team-overlay">
+                <div class="d-flex align-items-center justify-content-start">
+                    <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-twitter"></i></a>
+                    <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-facebook"></i></a>
+                    <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="bg-light text-center p-4">
+            <h5 class="text-uppercase">@item.FullName</h5>
+            <p class="m-0">@item.Position</p>
+        </div>
+    </div>
+}

@@ -1,0 +1,108 @@
+﻿@using PetShop.Utilities;
+@model PetShop.Models.TbCustomer;
+@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DOPY - Pet Shop Website</title>
+    <link href="~/assets/img/Logo/logo.jpg" rel="icon">
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/admin/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/admin/dist/css/adminlte.min.css">
+
+    <link rel="stylesheet" href="~/admin/scss/pages/_login_and_register.scss">
+</head>
+<body class="hold-transition register-page">
+    <div class="register-box">
+        <div class="card card-outline card-primary">
+            <div class="card-body">
+                <p class="login-box-msg h3">Đăng ký tài khoản</p>
+
+                <form action="/Admin/Register/Index" method="post">
+                    <div class="input-group mb-3">
+                        <input type="text" asp-for="FullName" class="form-control" placeholder="Họ tên">
+                        
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="date" asp-for="Birthday" class="form-control" placeholder="Ngày sinh">
+                        
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" asp-for="Phone" class="form-control" placeholder="Số điện thoại">
+                        
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" asp-for="Address" class="form-control" placeholder="Địa chỉ">
+                        
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="email" asp-for="Email" class="form-control" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" asp-for="Password" class="form-control" placeholder="Mật khẩu">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group d-none">
+                        <input asp-for="IsActive" class="form-control" value="True" />
+                    </div>
+                    <div class="col-12 text-center text-danger">
+                        <h6>
+                            @Function._MessageEmail
+                        </h6>
+                    </div>
+                    <div class="icheck-primary">
+                        <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                        <label for="agreeTerms">
+                            Tôi đồng ý với các <a href="#">điều khoản</a>
+                        </label>
+                    </div>
+                    <div class="align-content-center">
+                        <button type="submit" class="btn btn-primary btn-block">Đăng ký</button>
+                    </div>
+                </form>
+
+                <div class="social-auth-links text-center">
+                    <a href="#" class="btn btn-block btn-primary">
+                        <i class="fab fa-facebook mr-2"></i>
+                        Đăng ký bằng Facebook
+                    </a>
+                    <a href="#" class="btn btn-block btn-danger">
+                        <i class="fab fa-google-plus mr-2"></i>
+                        Đăng ký bằng Google+
+                    </a>
+                </div>
+
+                <a asp-controller="Login" asp-action="Index" class="text-center">Đăng nhập</a>
+            </div>
+            <!-- /.form-box -->
+        </div><!-- /.card -->
+    </div>
+    <!-- /.register-box -->
+    <!-- jQuery -->
+    <script src="~/admin/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/admin/dist/js/adminlte.min.js"></script>
+</body>
+</html>
+

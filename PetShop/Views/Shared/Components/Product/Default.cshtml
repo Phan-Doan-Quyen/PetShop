@@ -1,0 +1,25 @@
+﻿@model IEnumerable<PetShop.Models.TbProduct>
+
+@foreach (var item in Model)
+{
+    string sUrl = $"/product/{item.Alias}-{item.ProductId}.html";
+    <div class="pb-5">
+        <div class="product-item position-relative bg-light d-flex flex-column text-center">
+            <img class="img-fluid mb-4" src="@item.Image" alt="">
+            <h6 class="text-uppercase">@item.Title</h6>
+            @if (item.PriceSale == 0)
+            {
+                <span class="text-primary mb-0">@item.Price đ</span>
+            }
+            else
+            {
+                <span class="text-primary mb-0">@item.PriceSale đ</span>
+                <span class="text-decoration-line-through mb-0" style="color:#c9c4c3">@item.Price đ</span>
+            }
+            <div class="btn-action d-flex justify-content-center">
+                <a class="btn btn-primary py-2 px-3" href=""><i class="bi bi-cart"></i></a>
+                <a class="btn btn-primary py-2 px-3" href="@sUrl"><i class="bi bi-eye"></i></a>
+            </div>
+        </div>
+    </div>
+}

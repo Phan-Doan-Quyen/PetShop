@@ -1,0 +1,8 @@
+﻿@model IEnumerable<PetShop.Models.TbMenu>
+
+@foreach (var item in Model.Where(i => i.Levels == 1))
+{
+    <a asp-controller="@item.Alias" asp-action="Index" class="nav-item nav-link">
+        @item.Title
+    </a>
+}
