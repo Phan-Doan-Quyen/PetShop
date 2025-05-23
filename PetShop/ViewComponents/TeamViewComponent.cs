@@ -18,7 +18,7 @@ namespace PetShop.ViewComponents
             var items = _context.TbAccounts.Include(m => m.Role)
                 .Where(m => (bool)m.IsActive);
             return await Task.FromResult<IViewComponentResult>
-                (View(items.OrderBy(m => m.AccountId).ToList()));
+                (View(items.OrderByDescending(m => m.AccountId).ToList()));
         }
     }
 }
