@@ -17,14 +17,14 @@ namespace PetShop.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(TbCustomer customer)
+        public IActionResult Index(TbAccount account)
         {
-            if (customer == null)
+            if (account == null)
             {
                 return NotFound();
             }
             //Kiểm tra sự tồn tại của email trong csdl
-            var check = _context.TbCustomers.Where(m => m.Email == customer.Email).FirstOrDefault();
+            var check = _context.TbAccounts.Where(m => m.Email == account.Email).FirstOrDefault();
             if (check != null)
             {
                 //HIện thị thông báo
@@ -33,8 +33,8 @@ namespace PetShop.Controllers
             }
             //Nếu ko có thì thêm vào csdl
             Function._MessageEmail = string.Empty;
-            customer.Password = Function.MD5Password(customer.Password);
-            _context.Add(customer);
+            account.Password = Function.MD5Password(account.Password);
+            _context.Add(account);
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Login");

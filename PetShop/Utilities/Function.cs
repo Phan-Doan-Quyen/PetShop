@@ -10,9 +10,12 @@ namespace PetShop.Utilities
         public static string _FullName = String.Empty;
         public static string _Phone = String.Empty;
         public static string _Email = String.Empty;
+        public static string _Birthday = String.Empty;
+        public static string _Address = String.Empty;
         public static string _Message = string.Empty;
         public static string _MessageEmail = string.Empty;
         public static int _CustomerId = 0;
+
         public static string TitlesluGenerationAlias(string title)
         {
             return SlugGenerator.SlugGenerator.GenerateSlug(title);

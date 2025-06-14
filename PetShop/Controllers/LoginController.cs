@@ -16,16 +16,16 @@ namespace PetShop.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Index(TbCustomer customer)
+        public IActionResult Index(TbAccount account)
         {
-            if (customer == null)
+            if (account == null)
             {
                 return NotFound();
             }
             //Mã hóa mật khẩu trước khi kiểm tra
-            string pw = Function.MD5Password(customer.Password);
+            string pw = Function.MD5Password(account.Password);
             //Kiểm tra sự tồn tại của email trong csdl
-            var check = _context.TbCustomers.Where(m => (m.Email == customer.Email) && (m.Password == pw)).FirstOrDefault();
+            var check = _context.TbAccounts.Where(m => (m.Email == account.Email) && (m.Password == pw)).FirstOrDefault();
             if (check == null)
             {
                 //HIện thị thông báo
@@ -34,11 +34,19 @@ namespace PetShop.Controllers
             }
             //Vào trang admin nếu đúng email và password
             Function._Message = string.Empty;
-            Function._CustomerId = check.CustomerId;
+            Function._AccountId = check.AccountId;
             Function._FullName = string.IsNullOrEmpty(check.FullName) ? string.Empty : check.FullName;
             Function._Email = string.IsNullOrEmpty(check.Email) ? string.Empty : check.Email;
 
-            return RedirectToAction("Index", "Home");
+            if (check != null)
+            {
+                if (check.RoleId == 1)
+                {
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
         }
     }
 }
