@@ -242,7 +242,7 @@
                                                 <div class="product-add-action">
                                                     <ul>
                                                         <li>
-                                                            <a href="cart.html">
+                                                            <a data-toggle="tooltip" class="add-to-cart" href="javascript:void(0)" onclick="addToCart(@item.ProductId)" title="Thêm vào giỏ">
                                                                 <i class="bi bi-cart3"></i>
                                                             </a>
                                                         </li>
@@ -295,7 +295,7 @@
                                                 <div class="product-add-action">
                                                     <ul>
                                                         <li>
-                                                            <a href="cart.html">
+                                                            <a data-toggle="tooltip" class="add-to-cart" href="javascript:void(0)" onclick="addToCart(@item.ProductId)" title="Thêm vào giỏ">
                                                                 <i class="bi bi-cart3"></i>
                                                             </a>
                                                         </li>
@@ -359,3 +359,22 @@
         </div>
     </div>
 </main>
+<script>
+    function addToCart(productId) {
+        $.ajax({
+            url: '@Url.Action("AddToCart", "Order")',
+            type: 'POST',
+            data: { id: productId },
+            success: function (response) {
+                // Có thể hiển thị thông báo thành công
+                alert('Sản phẩm đã được thêm vào giỏ hàng!');
+                // Tùy chọn: Cập nhật số lượng giỏ hàng trên giao diện
+                // Ví dụ: Cập nhật .product-count trong _Layout.cshtml
+                window.location.href = '@Url.Action("Index", "Order")'; // Chuyển hướng đến giỏ hàng
+            },
+            error: function () {
+                alert('Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.');
+            }
+        });
+    }
+</script>

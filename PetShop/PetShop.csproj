@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Views\Order\Checkout.csdtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="elFinder.NetCore" Version="1.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />

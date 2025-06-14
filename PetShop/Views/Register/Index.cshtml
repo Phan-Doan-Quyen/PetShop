@@ -1,11 +1,7 @@
 ﻿@using PetShop.Utilities;
 @model PetShop.Models.TbCustomer;
-@{
-    Layout = "";
-}
-<!DOCTYPE html>
-<html lang="en">
-<head>
+
+@section Styles {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DOPY - Pet Shop Website</title>
@@ -21,8 +17,9 @@
     <link rel="stylesheet" href="~/admin/dist/css/adminlte.min.css">
 
     <link rel="stylesheet" href="~/admin/scss/pages/_login_and_register.scss">
-</head>
-<body class="hold-transition register-page">
+}
+
+<div class="hold-transition register-page">
     <div class="register-box">
         <div class="card card-outline card-primary">
             <div class="card-body">
@@ -103,6 +100,5 @@
     <script src="~/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/admin/dist/js/adminlte.min.js"></script>
-</body>
-</html>
+</div>
 

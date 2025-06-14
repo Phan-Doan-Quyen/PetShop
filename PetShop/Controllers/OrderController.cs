@@ -1,23 +1,98 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using PetShop.Models;
 using PetShop.Utilities;
 
-namespace PetShop.Controllers
+namespace DACN.Controllers
 {
-    public class CheckoutController : Controller
+    public class OrderController : Controller
     {
         private readonly PetShopContext _context;
 
-        public CheckoutController(PetShopContext context)
+        public OrderController(PetShopContext context)
         {
             _context = context;
         }
+
         public IActionResult Index()
         {
-            var checkouts = _context.TbOrderDetails.Include(t => t.Product).ToList();
-            return View(checkouts);
+            var products = _context.TbProducts.ToList();
+            ViewBag.product = products;
+
+            var cartItems = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
+            ViewBag.cartItems = cartItems;
+
+            decimal cartTotal = 0;
+            int itemCount = 0;
+            foreach (var item in cartItems)
+            {
+                decimal itemPrice = item.PriceSale.HasValue && item.PriceSale.Value > 0 ? (decimal)item.PriceSale.Value : (decimal)item.Price;
+                cartTotal += itemPrice * item.Quantity;
+                itemCount += item.Quantity;
+            }
+            ViewBag.CartTotal = cartTotal;
+            ViewBag.ItemCount = itemCount;
+
+            return View();
         }
+
+        [HttpPost]
+        public IActionResult AddToCart(int id)
+        {
+            var product = _context.TbProducts.Find(id);
+            if (product != null)
+            {
+                var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
+                var cartItem = cart.FirstOrDefault(x => x.ProductId == id);
+                if (cartItem != null)
+                {
+                    cartItem.Quantity++;
+                }
+                else
+                {
+                    cart.Add(new CartItem
+                    {
+                        ProductId = product.ProductId,
+                        Alias = product.Alias,
+                        Title = product.Title,
+                        Image = product.Image,
+                        Price = product.Price.GetValueOrDefault(),
+                        PriceSale = product.PriceSale,
+                        Quantity = 1
+                    });
+                }
+                HttpContext.Session.SetObjectAsJson("Cart", cart);
+            }
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult RemoveFromCart(int id)
+        {
+            var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
+            var itemToRemove = cart.FirstOrDefault(x => x.ProductId == id);
+            if (itemToRemove != null)
+            {
+                cart.Remove(itemToRemove);
+                HttpContext.Session.SetObjectAsJson("Cart", cart);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult UpdateQuantity(int id, int change)
+        {
+            var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
+            var item = cart.FirstOrDefault(x => x.ProductId == id);
+            if (item != null)
+            {
+                item.Quantity = Math.Max(1, item.Quantity + change);
+                HttpContext.Session.SetObjectAsJson("Cart", cart);
+            }
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public IActionResult Checkout(string phone, string address)
         {
@@ -101,5 +176,9 @@ namespace PetShop.Controllers
             }
         }
 
+        public IActionResult OrderSuccess()
+        {
+            return View();
+        }
     }
 }

@@ -15,6 +15,8 @@ public partial class PetShopContext : DbContext
     {
     }
 
+    public virtual DbSet<AdminUser> AdminUsers { get; set; }
+
     public virtual DbSet<TbAccount> TbAccounts { get; set; }
 
     public virtual DbSet<TbBlog> TbBlogs { get; set; }
@@ -49,9 +51,21 @@ public partial class PetShopContext : DbContext
 
     public virtual DbSet<TbServiceReview> TbServiceReviews { get; set; }
 
-
+   
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<AdminUser>(entity =>
+        {
+            entity.HasKey(e => e.UserId);
+
+            entity.ToTable("AdminUser");
+
+            entity.Property(e => e.UserId).ValueGeneratedNever();
+            entity.Property(e => e.Email).HasMaxLength(50);
+            entity.Property(e => e.Password).HasMaxLength(50);
+            entity.Property(e => e.UserName).HasMaxLength(50);
+        });
+
         modelBuilder.Entity<TbAccount>(entity =>
         {
             entity.HasKey(e => e.AccountId);
@@ -66,6 +80,7 @@ public partial class PetShopContext : DbContext
                 .IsFixedLength();
             entity.Property(e => e.Password).HasMaxLength(50);
             entity.Property(e => e.Phone).HasMaxLength(50);
+            entity.Property(e => e.Position).HasMaxLength(50);
             entity.Property(e => e.Username).HasMaxLength(50);
 
             entity.HasOne(d => d.Role).WithMany(p => p.TbAccounts)
@@ -151,9 +166,11 @@ public partial class PetShopContext : DbContext
 
             entity.ToTable("tb_Customer");
 
+            entity.Property(e => e.Address).HasMaxLength(500);
             entity.Property(e => e.Avatar).HasMaxLength(50);
             entity.Property(e => e.Birthday).HasColumnType("datetime");
             entity.Property(e => e.Email).HasMaxLength(50);
+            entity.Property(e => e.FullName).HasMaxLength(50);
             entity.Property(e => e.LastLogin).HasColumnType("datetime");
             entity.Property(e => e.Password).HasMaxLength(50);
             entity.Property(e => e.Phone).HasMaxLength(50);

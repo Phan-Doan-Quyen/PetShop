@@ -1,7 +1,17 @@
+﻿using PetShop.Models;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using PetShop.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Th�m d?ch v? Session
+builder.Services.AddDistributedMemoryCache(); // Cung c?p b? nh? cache cho Session
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Th?i gian timeout c?a Session
+    options.Cookie.HttpOnly = true; // Cookie ch? c� th? truy c?p qua HTTP
+    options.Cookie.IsEssential = true; // Cookie c?n thi?t, kh�ng y�u c?u ??ng � GDPR
+});
 
 builder.Services.AddDbContext<PetShopContext>(options =>
 {
@@ -17,16 +27,17 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
-
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession(); // Th�m middleware Session v�o pipeline, ph?i ??t sau UseRouting v� tr??c MapControllerRoute
+
+app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "areas",
@@ -35,6 +46,7 @@ app.MapControllerRoute(
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}")
+    .WithStaticAssets();
 
 app.Run();

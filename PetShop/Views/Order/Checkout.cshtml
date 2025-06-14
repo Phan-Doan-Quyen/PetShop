@@ -1,0 +1,31 @@
+﻿@{
+    var cartItems = ViewBag.CartItems as List<PetShop.Models.CartItem> ?? new List<PetShop.Models.CartItem>();
+    decimal total = cartItems.Sum(i => (i.PriceSale > 0 ? i.PriceSale.Value : i.Price) * i.Quantity);
+}
+<h2>Thanh toán</h2>
+
+<form method="post" asp-action="SubmitOrder">
+    <div class="form-group">
+        <label>Họ tên</label>
+        <input type="text" name="customerName" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Số điện thoại</label>
+        <input type="text" name="phone" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Địa chỉ</label>
+        <input type="text" name="address" class="form-control" required />
+    </div>
+
+    <h4>Tóm tắt đơn hàng:</h4>
+    <ul>
+        @foreach (var item in cartItems)
+        {
+            <li>@item.Title x @item.Quantity = @(item.PriceSale > 0 ? item.PriceSale.Value : item.Price) đ</li>
+        }
+    </ul>
+    <p><strong>Tổng tiền:</strong> @total đ</p>
+
+    <button type="submit" class="btn btn-success">Đặt hàng</button>
+</form>

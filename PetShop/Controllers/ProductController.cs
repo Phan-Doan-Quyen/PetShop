@@ -14,7 +14,7 @@ namespace PetShop.Controllers
         }
         public IActionResult Index()
         {
-            var products = _context.TbProducts.ToList(); // Lấy danh sách sản phẩm
+            var products = _context.TbProducts.ToList(); 
             return View(products);
         }
 

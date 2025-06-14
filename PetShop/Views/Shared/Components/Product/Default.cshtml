@@ -5,8 +5,12 @@
     string sUrl = $"/product/{item.Alias}-{item.ProductId}.html";
     <div class="pb-5">
         <div class="product-item position-relative bg-light d-flex flex-column text-center">
-            <img class="img-fluid mb-4" src="@item.Image" alt="">
-            <h6 class="text-uppercase">@item.Title</h6>
+            <a href="@sUrl">
+                <img class="img-fluid mb-4" src="@item.Image" alt="">
+            </a>
+            <a href="@sUrl">
+                <h6 class="text-uppercase">@item.Title</h6>
+            </a>
             @if (item.PriceSale == 0)
             {
                 <span class="text-primary mb-0">@item.Price đ</span>
@@ -17,9 +21,28 @@
                 <span class="text-decoration-line-through mb-0" style="color:#c9c4c3">@item.Price đ</span>
             }
             <div class="btn-action d-flex justify-content-center">
-                <a class="btn btn-primary py-2 px-3" href=""><i class="bi bi-cart"></i></a>
+                <a class="btn btn-primary py-2 px-3 add-to-cart" href="javascript:void(0)" onclick="addToCart(@item.ProductId)" title="Thêm vào giỏ"><i class="bi bi-cart"></i></a>
                 <a class="btn btn-primary py-2 px-3" href="@sUrl"><i class="bi bi-eye"></i></a>
             </div>
         </div>
     </div>
 }
+<script>
+    function addToCart(productId) {
+        $.ajax({
+            url: '@Url.Action("AddToCart", "Order")',
+            type: 'POST',
+            data: { id: productId },
+            success: function (response) {
+                // Có thể hiển thị thông báo thành công
+                alert('Sản phẩm đã được thêm vào giỏ hàng!');
+                // Tùy chọn: Cập nhật số lượng giỏ hàng trên giao diện
+                // Ví dụ: Cập nhật .product-count trong _Layout.cshtml
+                window.location.href = '@Url.Action("Index", "Order")'; // Chuyển hướng đến giỏ hàng
+            },
+            error: function () {
+                alert('Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.');
+            }
+        });
+    }
+</script>
