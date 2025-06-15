@@ -15,7 +15,7 @@ namespace PetShop.Controllers
         public IActionResult Index()
         {
             var products = _context.TbProducts.ToList(); 
-            return View(products);
+            return View(products.OrderByDescending(m => m.ProductId));
         }
 
         [Route("/product/{alias}-{id}.html")]
