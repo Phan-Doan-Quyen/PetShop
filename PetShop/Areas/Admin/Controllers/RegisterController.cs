@@ -40,7 +40,7 @@ namespace PetShop.Areas.Admin.Controllers
             _context.Add(account);
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Index", "Accounts");
         }
     }
 }

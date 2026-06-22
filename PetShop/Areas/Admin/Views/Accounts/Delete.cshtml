@@ -1,0 +1,72 @@
+﻿@model PetShop.Models.TbAccount
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Xoá tài khoản nhân viên</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Xoá tài khoản nhân viên</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Xoá tài khoản nhân viên</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email: </label>
+                                @Html.DisplayFor(model => model.Email)
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Họ tên: </label>
+                                @Html.DisplayFor(model => model.FullName)
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Ngày sinh: </label>
+                                @Html.DisplayFor(model => model.Birthday)
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Số điện thoại: </label>
+                                @Html.DisplayFor(model => model.Phone)
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Địa chỉ: </label>
+                                @Html.DisplayFor(model => model.Address)
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Chức vụ: </label>
+                                @Html.DisplayFor(model => model.Position)
+                            </div>
+                            <form asp-action="Delete">
+                                <input type="hidden" asp-for="AccountId" />
+                                <input type="submit" value="Xoá" class="btn btn-danger" style="margin-right:10px" />
+                                <a asp-action="Index" class="btn btn-outline-primary">Quay lại</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

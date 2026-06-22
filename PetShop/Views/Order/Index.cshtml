@@ -186,7 +186,9 @@
                                                         <input type="text" name="address" placeholder="Địa chỉ giao hàng" required class="form-control mb-2" />
 
                                                         <div class="cart-checkout-btn pull-right mt-2">
-                                                            <button type="submit" class="btn btn-primary checkout-btn">TIẾN HÀNH THANH TOÁN</button>
+                                                            <button type="submit" class="btn btn-primary checkout-btn">
+                                                                <a asp-controller="Checkout" asp-action="Index">TIẾN HÀNH THANH TOÁN</a>
+                                                            </button>
                                                         </div>
                                                     </form>
 

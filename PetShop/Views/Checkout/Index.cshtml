@@ -1,4 +1,37 @@
-﻿@model IEnumerable<TbOrderDetail>
+﻿@{
+    List<PetShop.Models.TbProduct> product = ViewBag.product as List<PetShop.Models.TbProduct> ?? new List<PetShop.Models.TbProduct>();
+}
+@{
+    var cartItems = ViewBag.cartItems as List<PetShop.Models.CartItem> ?? new List<PetShop.Models.CartItem>();
+    decimal cartSubtotal = 0;
+
+    foreach (var item in cartItems)
+    {
+        decimal itemPrice = item.PriceSale.HasValue && item.PriceSale.Value > 0 ? (decimal)item.PriceSale.Value : (decimal)item.Price;
+        decimal itemTotal = itemPrice * item.Quantity; // Sử dụng item.Quantity
+        cartSubtotal += itemTotal;
+    }
+}
+@{
+    var errorMessage = TempData["Error"] as string;
+}
+@if (TempData["Error"] != null)
+{
+    <div class="d-flex justify-content-center mt-3">
+        <div class="alert alert-danger text-center w-50">
+            @TempData["Error"]
+        </div>
+    </div>
+}
+
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+        @errorMessage
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Đóng"></button>
+    </div>
+}
 
 @section Styles {
     <link rel="stylesheet" href="~/assets/css/vendor/font-awesome.min.css" />
@@ -80,11 +113,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var item in Model)
+                                    @foreach (var item in cartItems)
                                     {
                                         <tr class="cart_item">
                                             <td class="cart-product-name">
-                                                @item.Product.Title
+                                                @item.Title
                                             </td>
                                             <td class="">
                                                 <strong class="product-quantity">
@@ -93,13 +126,13 @@
                                             </td>
                                             <td class="cart-product-total">
                                                 <span class="amount">
-                                                    @if (item.Product.PriceSale == 0)
+                                                    @if (item.PriceSale == 0)
                                                     {
-                                                        <span>@item.Product.Price đ</span>
+                                                        <span>@item.Price đ</span>
                                                     }
                                                     else
                                                     {
-                                                        <span>@item.Product.PriceSale đ</span>
+                                                        <span>@item.PriceSale đ</span>
                                                     }
                                                 </span>
                                             </td>
@@ -109,11 +142,11 @@
                                 <tfoot>
                                     <tr class="cart-subtotal">
                                         <th>Tổng cộng</th>
-                                        <td><span class="amount">487000 đ</span></td>
+                                        <td><span class="amount">@cartSubtotal đ</span></td>
                                     </tr>
                                     <tr class="order-total">
                                         <th>Tổng tiền</th>
-                                        <td><strong><span class="amount">487000 đ</span></strong></td>
+                                        <td><strong><span class="amount">@cartSubtotal đ</span></strong></td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -121,24 +154,13 @@
                         <div class="payment-method">
                             <div class="payment-accordion">
                                 <div id="accordion">
-                                    <div class="card">
-                                        <div class="card-header" id="#payment-1">
-                                            <h5 class="panel-title">
-                                                <a href="javascript:void(0)" class="" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true">
-                                                    Thanh toán khi nhận hàng
-                                                </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header" id="#payment-2">
-                                            <h5 class="panel-title">
-                                                <a href="javascript:void(0)" class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false">
-                                                    Thanh toán qua ngân hàng
-                                                </a>
-                                            </h5>
-                                        </div>
-                                    </div>
+                                    <form action="/action_page.php">
+                                        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" style="background-color:aquamarine">
+                                        <label for="vehicle1" style="font-size:large; margin-left: 5px">   Thanh toán khi nhận hàng</label><br>
+                                        <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                                        <label for="vehicle2" style="font-size:large; margin-left: 5px">   Thanh toán qua ngân hàng</label><br>
+                                        @* <input type="submit" value="Lọc" style="background-color:aquamarine"> *@
+                                    </form>
                                 </div>
                                 <div class="order-button-payment">
                                     <input value="Thanh toán" type="submit">
@@ -151,3 +173,15 @@
         </div>
     </div>
 </main>
+<script>
+    function updateQuantity(productId, change) {
+        $.ajax({
+            url: '@Url.Action("UpdateQuantity", "Order")',
+            type: 'POST',
+            data: { id: productId, change: change },
+            success: function (response) {
+                location.reload();
+            }
+        });
+    }
+</script>

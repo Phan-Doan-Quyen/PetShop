@@ -1,10 +1,16 @@
 ﻿@using PetShop.Utilities;
 @model PetShop.Models.TbAccount;
 
-@section Styles {
+@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DOPY - Pet Shop Website</title>
+    <title>Pet Store Website</title>
     <link href="~/assets/img/Logo/logo.jpg" rel="icon">
 
     <!-- Google Font: Source Sans Pro -->
@@ -17,9 +23,8 @@
     <link rel="stylesheet" href="~/admin/dist/css/adminlte.min.css">
 
     <link rel="stylesheet" href="~/admin/scss/pages/_login_and_register.scss">
-}
-
-<div class="hold-transition login-page">
+</head>
+<body class="hold-transition login-page">
     <div class="login-box">
         <div class="card card-outline card-primary">
             <div class="card-body">
@@ -77,4 +82,5 @@
     <script src="~/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/admin/dist/js/adminlte.min.js"></script>
-</div>
+</body>
+</html>

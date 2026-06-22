@@ -1,0 +1,87 @@
+﻿@model PetShop.Models.TbAccount
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Chỉnh sửa tài khoản nhân viên</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Chỉnh sửa tài khoản nhân viên</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- <hr /> -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Chỉnh sửa tài khoản nhân viên</h3>
+                        </div>
+                        <form asp-action="Edit">
+                            <div class="card-body">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input type="hidden" asp-for="AccountId" />
+                                <div class="form-group">
+                                    <label asp-for="Email" class="control-label">Email</label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Password" class="control-label">Mật khẩu</label>
+                                    <input asp-for="Password" class="form-control" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="FullName" class="control-label">Họ tên</label>
+                                    <input asp-for="FullName" class="form-control" />
+                                    <span asp-validation-for="FullName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Birthday" class="control-label">Ngày sinh</label>
+                                    <input asp-for="Birthday" class="form-control" />
+                                    <span asp-validation-for="Birthday" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Phone" class="control-label">Số điện thoại</label>
+                                    <input asp-for="Phone" class="form-control" />
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Address" class="control-label">Địa chỉ</label>
+                                    <input asp-for="Address" class="form-control" />
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Position" class="control-label">Chức vụ</label>
+                                    <input asp-for="Position" class="form-control" />
+                                    <span asp-validation-for="Position" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Sửa" class="btn btn-primary" style="margin-right:10px" />
+                                    <a asp-action="Index" class="btn btn-outline-primary">Quay lại</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
